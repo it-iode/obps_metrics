@@ -2,7 +2,9 @@
 """
 Created on Thu Jan 30 15:34:24 2020
 
-@author: Administrator
+@author: Cristian Munoz Mas
+
+Collects metrics from the obpsystem.org application in Google Analytics. 
 """
 
 
@@ -20,8 +22,8 @@ import pandas as pd
 
 settings = config.get_settings()
 SCOPES = settings['ga_scopes']
-KEY_FILE_LOCATION = settings['ga_key_file_location_searchengine']
-VIEW_ID = settings['ga_view_id_searchengine']
+KEY_FILE_LOCATION = settings['ga_key_file_location_mainlandingpage']
+VIEW_ID = settings['ga_view_id_mainlandingpage']
 
 def initialize_analyticsreporting():
   """Initializes an Analytics Reporting API V4 service object.
@@ -57,8 +59,8 @@ def get_report(analytics, start_date, end_date):
                       {'expression': 'ga:users'},
                       {'expression': 'ga:newUsers'},
                       {'expression':'ga:sessionsPerUser'}],
-          'dimensions': [{'name': 'ga:country'}, {'name': 'ga:pagePath'}]
-          #'dimensions': [{'name': 'ga:country'}]
+          #'dimensions': [{'name': 'ga:country'}, {'name': 'ga:pagePath'}]
+          'dimensions': [{'name': 'ga:country'}]
         }]
       }
   ).execute()
@@ -84,8 +86,8 @@ def print_response(response):
     columns = ['country','sessions','users']
     countries_df = pd.DataFrame(columns = columns)
 
-    columns = ['doc_path']
-    pagepaths_df = pd.DataFrame(columns = columns)
+    #columns = ['doc_path']
+    #pagepaths_df = pd.DataFrame(columns = columns)
 
     columns = ['sessions_user']
     sessions_user_df = pd.DataFrame(columns = columns)
@@ -129,21 +131,7 @@ def print_response(response):
       countries_df = countries_df[~countries_df.country.str.contains("Cayman Islands")]
       countries_df = countries_df[~countries_df.country.str.contains("(not set)")]
       #sessions_user_df = sessions_user_df.append({'sessions_user': sessions_user}, ignore_index=True)
-      pagepaths_df = pagepaths_df.append({'country':country, 'sessions': session, 'users': user, 'doc_path':doc_path}, ignore_index=True)
 
-
-      # countries_df = countries_df.append({'country':country, 'sessions': session, 'users': user}, ignore_index=True)
-      # pagepaths_df = pagepaths_df.append({'country':pagepath, 'sessions': session, 'users': user, 'pagepaths':pagepath}, ignore_index=True)
-  users_df.users = users_df.users.astype(int)
-  users_df.new_users = users_df.new_users.astype(int)
-  pagepaths_df.users = pagepaths_df.users.astype(int)
-  pagepaths_df.sessions = pagepaths_df.sessions.astype(int)
-  pagepaths_df = pagepaths_df[pagepaths_df.doc_path.str.contains("/handle/")]
-  pagepaths_df = pagepaths_df[pagepaths_df.doc_path.str.contains(".pdf")]
-  pagepaths_df = pagepaths_df[~pagepaths_df.doc_path.str.contains(".jpg")]
-  pagepaths_df = pagepaths_df.sort_values(['sessions'], ascending=False)
-  pagepaths_df = pagepaths_df.groupby('doc_path').agg({'country':'count', 'sessions': 'sum', 'users': 'sum'}).reset_index().rename(columns={'country':'countries'})
-  docs_info = pagepaths_df.to_json(orient='table')
   countries_df = countries_df.groupby('country').agg({'sessions': 'sum', 'users': 'sum'}).reset_index()
   countries_info = countries_df.to_json(orient='table')
   # countries_df.users = countries_df.users.astype(int)
@@ -161,12 +149,12 @@ def print_response(response):
   # #pagepaths_df = pagepaths_df.head(10)
   # #print pagepaths_df
   # #countries_df = countries_df.reset_index(drop=True)
-  return new_user_list, user_list, country_list, session_list, countries_df,pagepaths_df, sessions_user_df, users_df, countries_info, docs_info
+  return new_user_list, user_list, country_list, session_list, countries_df, sessions_user_df, users_df, countries_info
 
 def main(start_date, end_date):
   analytics = initialize_analyticsreporting()
   response = get_report(analytics, start_date, end_date)
-  new_user_list, user_list, country_list, session_list, countries_df,pagepaths_df, sessions_user_df, users_df, countries_info, docs_info = print_response(response)
+  new_user_list, user_list, country_list, session_list, countries_df, sessions_user_df, users_df, countries_info = print_response(response)
   # for i in range(0, len(new_user_list)):
   #     new_user_list[i] = int(new_user_list[i])
   # for i in range(0, len(user_list)):
@@ -179,5 +167,5 @@ def main(start_date, end_date):
   total_countries = countries_df.shape[0]
   total_sessions = countries_df.sessions.sum()
 
-  return total_new_users, total_users, total_countries, total_sessions, countries_df, pagepaths_df, sessions_user_df, users_df, countries_info, docs_info, response, start_date, end_date
+  return total_new_users, total_users, total_countries, total_sessions, countries_df, sessions_user_df, users_df, countries_info, response, start_date, end_date
 

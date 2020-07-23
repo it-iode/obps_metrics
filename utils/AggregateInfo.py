@@ -29,6 +29,9 @@ def get_number_rows_db():
 def get_attr_info_db(num_rows, attr, mode):
     cursor, conn = db.connect_db()
     if attr == 'countries':
+        if mode == 'historic_mainlanding':
+            table = 'ganalytics_obpsystem'
+            column = table + '.countries_info'
         if mode == 'historic':
             table = 'ganalytics_obpsorg'
             column = table + '.countries_info'
@@ -47,7 +50,9 @@ def get_attr_info_db(num_rows, attr, mode):
     return attr_info_json
     
 def update_countries_info(mode):
-    if mode == 'historic':
+    if mode == 'historic_mainlanding':
+        table_name = 'metrics.ganalytics_obpsystem_countries'
+    elif mode == 'historic':
         table_name = 'metrics.ganalytics_obpsorg_countries'
     elif mode == 'lastmonth':
         table_name = 'metrics.ganalytics_obpsorg_lastmonth_countries'
@@ -58,6 +63,7 @@ def update_countries_info(mode):
     countries_info_json = get_attr_info_db(num_rows, 'countries', mode)
     for i in range(0,len(countries_info_json)):        
         countries_info_df = convert_json_to_df(countries_info_json[i][0])
+        #countries_info_df = countries_info_df.reset_index()
         countries_info_df = countries_info_df.drop(columns='index')
         countries_info_df_agg = countries_info_df_agg.append(countries_info_df, ignore_index=True)
         countries_info_df_agg_per_country = countries_info_df_agg.groupby(['country']).sum().reset_index()
