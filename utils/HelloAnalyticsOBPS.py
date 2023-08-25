@@ -138,8 +138,6 @@ def print_response(response):
       new_row = pd.Series({'country':country, 'sessions': session, 'users': user, 'doc_path':doc_path})
       pagepaths_df = pd.concat([pagepaths_df, new_row.to_frame().T], ignore_index=True)
       #pagepaths_df = pagepaths_df.append({'country':country, 'sessions': session, 'users': user, 'doc_path':doc_path}, ignore_index=True)
-
-
       # countries_df = countries_df.append({'country':country, 'sessions': session, 'users': user}, ignore_index=True)
       # pagepaths_df = pagepaths_df.append({'country':pagepath, 'sessions': session, 'users': user, 'pagepaths':pagepath}, ignore_index=True)
   users_df.users = users_df.users.astype(int)

@@ -65,7 +65,8 @@ def update_countries_info(mode):
         countries_info_df = convert_json_to_df(countries_info_json[i][0])
         #countries_info_df = countries_info_df.reset_index()
         countries_info_df = countries_info_df.drop(columns='index')
-        countries_info_df_agg = countries_info_df_agg.append(countries_info_df, ignore_index=True)
+        countries_info_df_agg = pd.concat([countries_info_df_agg, countries_info_df], ignore_index=True)
+        #countries_info_df_agg = countries_info_df_agg.append(countries_info_df, ignore_index=True)
         countries_info_df_agg_per_country = countries_info_df_agg.groupby(['country']).sum().reset_index()
         
     cursor, conn = db.connect_db()
@@ -93,7 +94,8 @@ def update_docs_info(mode):
     for i in range(0,len(docs_info_json)):        
         docs_info_df = convert_json_to_df(docs_info_json[i][0])
         docs_info_df = docs_info_df.drop(columns='index')
-        docs_info_df_agg = docs_info_df_agg.append(docs_info_df, ignore_index=True)
+        docs_info_df_agg = pd.concat([docs_info_df_agg, docs_info_df], ignore_index=True)
+        #docs_info_df_agg = docs_info_df_agg.append(docs_info_df, ignore_index=True)
         docs_info_df_agg_per_doc = docs_info_df_agg.groupby(['doc_path']).sum().reset_index()
     cursor, conn = db.connect_db()
     query = '''DELETE FROM ''' + table_name + ';'
