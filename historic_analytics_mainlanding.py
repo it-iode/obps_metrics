@@ -33,7 +33,7 @@ def main(date_start, date_end):
         
         dum_date_end = datetime.strptime(dates_list[i+1], '%Y-%m-%d')- timedelta(days=1)
         date_end = datetime.strftime(dum_date_end, '%Y-%m-%d')
-        print ('Evaluating the period: ' + dates_list[i] + ' to ' + dates_list[i+1])
+        print('Evaluating the period: ' + dates_list[i] + ' to ' + dates_list[i+1])
         total_new_users, total_users, total_countries, total_sessions, countries_df, sessions_user_df, users_df, countries_info, response, start_date, end_date = analytics_obps_mainlanding.main(dates_list[i], date_end)
         cursor, conn = db.connect_db()
         
@@ -43,7 +43,7 @@ def main(date_start, date_end):
                      }
         
         if dates_list[i] in dates_list_db:
-            print ('The period ' + dates_list[i] + ' to ' + dates_list[i+1] + ' alrady exists. Results will be overwritten for this period.')
+            print('The period ' + dates_list[i] + ' to ' + dates_list[i+1] + ' alrady exists. Results will be overwritten for this period.')
             query = 'UPDATE metrics.ganalytics_obpsystem SET date_start = %(date1)s, date_end = %(date2)s, users_num_new = %(long3)s, users_num_total = %(long4)s, visits_num = %(long5)s, countries_num = %(long7)s, countries_info = %(json8)s WHERE date_start  = \'' + dates_list[i] + '\';'       
         elif dates_list[i] not in dates_list_db:
             query = '''INSERT INTO metrics.ganalytics_obpsystem (date_start, date_end, users_num_new, users_num_total, visits_num, countries_num, countries_info) VALUES (%(date1)s, %(date2)s,%(long3)s,%(long4)s,%(long5)s,%(long7)s,%(json8)s);''' 
