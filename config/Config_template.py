@@ -23,7 +23,14 @@ def get_settings():
     credentials['ga_view_id_searchengine'] =             ''
     credentials['ga_view_id_mainlandingpage'] =          ''       
     
+    # Mailchimp API key
+    credentials['mailchimp_api_key'] =  ''
     
-    
+    # dspace database settings
+    credentials['db_dspace_dbname'] =      ''
+    credentials['db_dspace_host'] =        ''
+    credentials['db_dspace_port'] =        ''
+    credentials['db_dspace_username'] =    ''
+    credentials['db_dspace_password'] =    ''    
     
     return credentials

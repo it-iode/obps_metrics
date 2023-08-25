@@ -12,17 +12,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 import utils.db_connect as db
 import country_list
+import config.Config as config
 
 class DspaceAudit():
     def __init__(self):
-        
+        settings = config.get_settings()
         self.db_config = {
-        'server': 'localhost',
-        'name': 'obps_dspace_20221123',
-        'user': 'postgres',
-        'password': 'postgres',
-        'port': '5432'
+        'server': settings['db_dspace_host'],
+        'name': settings['db_dspace_dbname'],
+        'user': settings['db_dspace_username'],
+        'password': settings['db_dspace_password'],
+        'port': settings['db_dspace_port']
         }
+
+        # self.db_config = {
+        # 'server': 'localhost',
+        # 'name': 'obps_dspace_20221123',
+        # 'user': 'postgres',
+        # 'password': 'postgres',
+        # 'port': '5432'
+        # }
         
         self.cities_world_path = '/home/a33272/Documents/python/obps_metrics/config/worldcities.csv'
         
