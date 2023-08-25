@@ -126,7 +126,9 @@ def print_response(response):
               # elif metricHeader.get('name') == 'ga:sessionsPerUser':
               #     #sessions_user_list.append(value)
               #     sessions_user = value
-      users_df = users_df.append({'users':int(user), 'new_users': int(new_user)}, ignore_index=True)
+      new_row = pd.Series({'users':int(user), 'new_users': int(new_user)})
+      users_df = pd.concat([users_df, new_row.to_frame().T], ignore_index=True)
+      #users_df = users_df.append({'users':int(user), 'new_users': int(new_user)}, ignore_index=True)
       countries_df = countries_df.append({'country':country, 'users':int(user),'sessions': int(session)}, ignore_index=True)
       countries_df = countries_df[~countries_df.country.str.contains("Cayman Islands")]
       countries_df = countries_df[~countries_df.country.str.contains("(not set)")]
