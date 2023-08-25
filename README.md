@@ -1,4 +1,5 @@
 # obps_metrics
+fun
 The obps_metrics is a set of python scripts developed at the IOC Ocean Best Practices System (IOC-OBPS) https://www.oceanbestpractices.org/ in order to gather metrics about the own OBPS performance that are dispalyed in a set of html web front-ends through the obps_dashboard project https://github.com/cmunozmas/obps_dashboard.
 
 ## Prerequisites:
