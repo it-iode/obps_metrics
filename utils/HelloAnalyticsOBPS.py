@@ -129,11 +129,15 @@ def print_response(response):
       new_row = pd.Series({'users':int(user), 'new_users': int(new_user)})
       users_df = pd.concat([users_df, new_row.to_frame().T], ignore_index=True)
       #users_df = users_df.append({'users':int(user), 'new_users': int(new_user)}, ignore_index=True)
-      countries_df = countries_df.append({'country':country, 'users':int(user),'sessions': int(session)}, ignore_index=True)
+      new_row = pd.Series({'country':country, 'users':int(user),'sessions': int(session)})
+      countries_df = pd.concat([countries_df, new_row.to_frame().T], ignore_index=True)
+      #countries_df = countries_df.append({'country':country, 'users':int(user),'sessions': int(session)}, ignore_index=True)
       countries_df = countries_df[~countries_df.country.str.contains("Cayman Islands")]
       countries_df = countries_df[~countries_df.country.str.contains("(not set)")]
       #sessions_user_df = sessions_user_df.append({'sessions_user': sessions_user}, ignore_index=True)
-      pagepaths_df = pagepaths_df.append({'country':country, 'sessions': session, 'users': user, 'doc_path':doc_path}, ignore_index=True)
+      new_row = pd.Series({'country':country, 'sessions': session, 'users': user, 'doc_path':doc_path})
+      pagepaths_df = pd.concat([pagepaths_df, new_row.to_frame().T], ignore_index=True)
+      #pagepaths_df = pagepaths_df.append({'country':country, 'sessions': session, 'users': user, 'doc_path':doc_path}, ignore_index=True)
 
 
       # countries_df = countries_df.append({'country':country, 'sessions': session, 'users': user}, ignore_index=True)
