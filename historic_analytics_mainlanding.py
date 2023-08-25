@@ -9,10 +9,10 @@ Collects metrics from the obpsystem.org application in Google Analytics.
 from datetime import datetime, timedelta
 from dateutil import relativedelta
 
-import utils.HelloAnalyticsOBPS_mainlanding as analytics_obps_mainlanding
-import utils.db_connect as db
-import utils.DateRanges as DateRanges
-import utils.AggregateInfo as AggregateInfo
+from . import utils.HelloAnalyticsOBPS_mainlanding as analytics_obps_mainlanding
+from . import utils.db_connect as db
+from . import utils.DateRanges as DateRanges
+from . import utils.AggregateInfo as AggregateInfo
 
 def main(date_start, date_end):
     #set list of dates to process
@@ -37,9 +37,9 @@ def main(date_start, date_end):
         total_new_users, total_users, total_countries, total_sessions, countries_df, sessions_user_df, users_df, countries_info, response, start_date, end_date = analytics_obps_mainlanding.main(dates_list[i], date_end)
         cursor, conn = db.connect_db()
         
-        arguments = {'date1':start_date, 'date2':end_date, 'long3':long(total_new_users), 
-                     'long4':long(total_users), 'long5':long(total_sessions), 
-                     'long7':long(total_countries), 'json8':str(countries_info)
+        arguments = {'date1':start_date, 'date2':end_date, 'long3':int(total_new_users), 
+                     'long4':int(total_users), 'long5':int(total_sessions), 
+                     'long7':int(total_countries), 'json8':str(countries_info)
                      }
         
         if dates_list[i] in dates_list_db:

@@ -76,7 +76,7 @@ def update_countries_info(mode):
         users_num = countries_info_df_agg_per_country.users.iloc[i]
         sessions_num = str(countries_info_df_agg_per_country.sessions.iloc[i])
         cursor, conn = db.connect_db()
-        arguments = {'str1':country_name, 'long2':long(users_num), 'long3':long(sessions_num)}    
+        arguments = {'str1':country_name, 'long2':int(users_num), 'long3':int(sessions_num)}    
         query = 'INSERT INTO ' + table_name + ' (country, users, sessions) VALUES (%(str1)s, %(long2)s,%(long3)s);' 
         db.write_db(cursor, conn, query, arguments)
     return countries_info_df_agg_per_country
@@ -104,7 +104,7 @@ def update_docs_info(mode):
         users_num = docs_info_df_agg_per_doc.users.iloc[i]
         sessions_num = str(docs_info_df_agg_per_doc.sessions.iloc[i])
         cursor, conn = db.connect_db()
-        arguments = {'long1':long(countries_num), 'long2':long(users_num), 'long3':long(sessions_num), 'str4': doc_path}    
+        arguments = {'long1':int(countries_num), 'long2':int(users_num), 'long3':int(sessions_num), 'str4': doc_path}    
         query = 'INSERT INTO ' + table_name + ' (doc_path, countries, users, sessions) VALUES (%(str4)s, %(long1)s, %(long2)s, %(long3)s);' 
         db.write_db(cursor, conn, query, arguments)
     return docs_info_df_agg_per_doc

@@ -9,10 +9,10 @@ Collects metrics from the OceanBestPractices.org application in Google Analytics
 from datetime import datetime, timedelta
 from dateutil import relativedelta
 
-import utils.HelloAnalyticsOBPS as analytics_obps
-import utils.db_connect as db
-import utils.DateRanges as DateRanges
-import utils.AggregateInfo as AggregateInfo
+from . import utils.HelloAnalyticsOBPS as analytics_obps
+from . import utils.db_connect as db
+from . import utils.DateRanges as DateRanges
+from . import utils.AggregateInfo as AggregateInfo
 
 def main(date_start, date_end):
     #set list of dates to process
@@ -38,9 +38,9 @@ def main(date_start, date_end):
         docs_access = pagepaths_df['doc_path'].count()
         cursor, conn = db.connect_db()
         
-        arguments = {'date1':start_date, 'date2':end_date, 'long3':long(total_new_users), 
-                     'long4':long(total_users), 'long5':long(total_sessions), 
-                     'long6':long(docs_access), 'long7':long(total_countries),
+        arguments = {'date1':start_date, 'date2':end_date, 'long3':int(total_new_users), 
+                     'long4':int(total_users), 'long5':int(total_sessions), 
+                     'long6':int(docs_access), 'long7':int(total_countries),
                      'json8':str(countries_info), 'json9':str(docs_info)}
         
         if dates_list[i] in dates_list_db:

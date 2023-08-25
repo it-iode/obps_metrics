@@ -10,7 +10,7 @@ import psycopg2
 import logging
 import numpy as np
 import matplotlib.pyplot as plt
-import utils.db_connect as db
+from . import utils.db_connect as db
 import country_list
 
 class DspaceAudit():
@@ -177,7 +177,7 @@ if __name__ == '__main__':
         # Global countries
         for i in range(len(df)) :
             if df.loc[i, 'publisher_place']:
-                res = [val for key, val in countries_dict.items() if val.lower() in df.loc[i, 'publisher_place'].lower()]
+                res = [val for key, val in list(countries_dict.items()) if val.lower() in df.loc[i, 'publisher_place'].lower()]
                 if res:
                     df.loc[i, 'country'] = res[0]
         # United Kingdom            
@@ -189,12 +189,12 @@ if __name__ == '__main__':
         # US states            
         for i in range(len(df)) :
             if df.loc[i, 'publisher_place']:
-                res = [key for key, val in us_states_dict.items() if key in df.loc[i, 'publisher_place']]
+                res = [key for key, val in list(us_states_dict.items()) if key in df.loc[i, 'publisher_place']]
                 if res:
                     df.loc[i, 'country'] = 'United States'
         for i in range(len(df)) :
             if df.loc[i, 'publisher_place']:
-                res = [val for key, val in us_states_dict.items() if val in df.loc[i, 'publisher_place']]
+                res = [val for key, val in list(us_states_dict.items()) if val in df.loc[i, 'publisher_place']]
                 if res:
                     df.loc[i, 'country'] = 'United States'
         # Other cities            
