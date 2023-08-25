@@ -102,7 +102,7 @@ def update_docs_info(mode):
     query = '''DELETE FROM ''' + table_name + ';'
     db.delete_db(cursor, conn, query)
     for i in range(0,len(docs_info_df_agg_per_doc)):
-        doc_path = docs_info_df_agg_per_doc.doc_path.iloc[i].encode('utf-8')
+        doc_path = docs_info_df_agg_per_doc.doc_path.iloc[i]
         countries_num = docs_info_df_agg_per_doc.countries.iloc[i]
         users_num = docs_info_df_agg_per_doc.users.iloc[i]
         sessions_num = str(docs_info_df_agg_per_doc.sessions.iloc[i])

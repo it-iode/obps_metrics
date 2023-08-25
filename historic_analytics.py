@@ -16,8 +16,9 @@ import utils.AggregateInfo as AggregateInfo
 
 def main(date_start, date_end):
     #set list of dates to process
-    date_start = '2023-07-01'
-    date_end = '2023-07-15'
+       
+    # date_start = '2023-07-01'
+    # date_end = '2023-07-15'
     dates_list = DateRanges.date_ranges(date_start, date_end)
     if len(dates_list) == 1:
         dates_list.append(date_end)
@@ -56,11 +57,24 @@ def main(date_start, date_end):
 
 
 if __name__ == "__main__":    
-    date_end = datetime.today().replace(day=1)
-    date_start = date_end - timedelta(days=1)
-    date_start = date_start.replace(day=1)
-    date_end = date_end.strftime('%Y-%m-%d')
-    date_start = date_start.strftime('%Y-%m-%d')
-    main(date_start, date_end)
+    # date_end = datetime.today().replace(day=1)
+    # date_start = date_end - timedelta(days=1)
+    # date_start = date_start.replace(day=1)
+    # date_end = date_end.strftime('%Y-%m-%d')
+    # date_start = date_start.strftime('%Y-%m-%d')
+    date_list = [['2023-06-01','2023-07-01'],
+                 ['2023-05-01','2023-06-01'],
+                 ['2023-04-01','2023-05-01'],
+                 ['2023-03-01','2023-04-01'],
+                 ['2023-02-01','2023-03-01'],
+                 ['2023-01-01','2023-02-01'],
+                 ['2022-12-01','2023-01-01'],
+                 ['2022-11-01','2022-12-01'],
+                 ['2022-10-01','2022-11-01']]
+    
+    for date_period in date_list:
+        date_start = date_period[0]
+        date_end = date_period[1] 
+        main(date_start, date_end)
     #main(sys.argv[0], sys.argv[1])
 
