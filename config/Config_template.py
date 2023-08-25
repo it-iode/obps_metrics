@@ -32,5 +32,8 @@ def get_settings():
     credentials['db_dspace_port'] =        ''
     credentials['db_dspace_username'] =    ''
     credentials['db_dspace_password'] =    ''    
-    
+
+    # world cities file
+    credentials['cities_world_path'] = ''
+
     return credentials

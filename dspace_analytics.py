@@ -10,7 +10,7 @@ import psycopg2
 import logging
 import numpy as np
 import matplotlib.pyplot as plt
-from . import utils.db_connect as db
+import utils.db_connect as db
 import country_list
 import config.Config as config
 
@@ -24,20 +24,11 @@ class DspaceAudit():
         'password': settings['db_dspace_password'],
         'port': settings['db_dspace_port']
         }
-
-        # self.db_config = {
-        # 'server': 'localhost',
-        # 'name': 'obps_dspace_20221123',
-        # 'user': 'postgres',
-        # 'password': 'postgres',
-        # 'port': '5432'
-        # }
         
-        self.cities_world_path = '/home/a33272/Documents/python/obps_metrics/config/worldcities.csv'
+        self.cities_world_path = settings['cities_world_path']
         
         self.mappingnavn_map = {'LOG': 'log',
-                                
-                                
+
                                 }
             
 
