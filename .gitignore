@@ -1,6 +1,9 @@
 # Created by https://www.gitignore.io/api/django,python
 # Edit at https://www.gitignore.io/?templates=django,python
 
+#we don't want json here
+*.json
+
 ### Specific files ###
 oceanbestpractices-195713-d1c8069837c8.json
 Config.py

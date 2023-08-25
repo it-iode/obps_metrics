@@ -109,7 +109,7 @@ def print_response(response):
         elif header == 'ga:pagePath':
             #pagepaths_list.append(dimension)
             doc_path = dimension
-            #print str(pagepath)
+            #print(str(pagepath))
         for i, values in enumerate(dateRangeValues):
         #print('Date range: ' + str(i))
             for metricHeader, value in zip(metricHeaders, values.get('values')):
@@ -157,11 +157,11 @@ def print_response(response):
   # # pagepaths_df = pagepaths_df[~pagepaths_df.index.str.contains(".jpg")]
   # # pagepaths_df = pagepaths_df.sort_values(['sessions'], ascending=False)
   # countries_df = countries_df.groupby('country', as_index=False).sum()
-  # print countries_df.country
+  # print(countries_df.country)
   # countries_df = countries_df.sort_values(['sessions'], ascending=False)
   # #countries_df = countries_df.head(10)
   # #pagepaths_df = pagepaths_df.head(10)
-  # #print pagepaths_df
+  # #print(pagepaths_df)
   # #countries_df = countries_df.reset_index(drop=True)
   return new_user_list, user_list, country_list, session_list, countries_df,pagepaths_df, sessions_user_df, users_df, countries_info, docs_info
 

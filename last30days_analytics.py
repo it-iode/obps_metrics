@@ -27,7 +27,7 @@ def main():
         
         dum_date_end = datetime.strptime(dates_list[i+1], '%Y-%m-%d')- timedelta(days=1)
         date_end = datetime.strftime(dum_date_end, '%Y-%m-%d')
-        print 'Evaluating the period: ' + dates_list[i] + ' to ' + dates_list[i+1]
+        print('Evaluating the period: ' + dates_list[i] + ' to ' + dates_list[i+1])
         total_new_users, total_users, total_countries, total_sessions, countries_df, pagepaths_df, sessions_user_df, users_df, countries_info, docs_info, response, start_date, end_date = analytics_obps.main(dates_list[i], date_end)
         docs_access = pagepaths_df['doc_path'].count()
         cursor, conn = db.connect_db()

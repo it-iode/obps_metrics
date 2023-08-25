@@ -9,8 +9,8 @@ Created on Sat Dec  4 15:23:52 2021
 import traceback
 import psycopg2
 import pandas as pd
-import config.Config as config
-import utils.db_connect as db
+from . import config.Config as config
+from . import utils.db_connect as db
 import numpy as np
 
 class ProcessConferences:
