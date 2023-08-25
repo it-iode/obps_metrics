@@ -9,10 +9,10 @@ Collects metrics from the OceanBestPractices.org application in Google Analytics
 from datetime import datetime, timedelta
 from dateutil import relativedelta
 
-from . import utils.HelloAnalyticsOBPS as analytics_obps
-from . import utils.db_connect as db
-from . import utils.DateRanges as DateRanges
-from . import utils.AggregateInfo as AggregateInfo
+import utils.HelloAnalyticsOBPS as analytics_obps
+import utils.db_connect as db
+import utils.DateRanges as DateRanges
+import utils.AggregateInfo as AggregateInfo
 
 def main(date_start, date_end):
     #set list of dates to process
