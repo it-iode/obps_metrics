@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "oceanbestpractices-195713",
+  "private_key_id": "2815e5808e776ac6c74a5a3042cdeb2c97957444",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4stXHLYpaGcG4\nYbVqs1Lmf8H1U3Unpt/FksQURmS0Hnl8gcTkT61a2f6GawKlyYOXkzr57+0s6lYf\nATTh/PlG3SqkMNfn5fVHBViMEZeTkST3Hxe9CmdmDrcsKEEQP/zntQF62AAVw1jp\nNYmDMLcE++g337Hln5J0SCpVaINnELLNmCu3nOKRJMGA1Wl8Fu/au+4gh788fnuH\nq0CHTIpGnczfSmOiPIuHL7LJIi08n39/w4r9mgcRwNLrIgpuo50zLHFtScxAKCmX\n2UGCE+chRUyj/1WTmRU3pxRWGKjy5Js4hGTTT7qY/4m3VEtS3to4tosfxjqwSwSE\nC9VLJKvbAgMBAAECggEAPjISpRjjzwV/Y4ybn8u1LeN1uBwbhne+QPT0THOL88+T\nT2cPm2ZtVPu1pyQf5x4dzwwIPyQZNRfQWm54lWUvuDo/4ryD6BZa60iUkc5WwZ2N\n2h3BS6pWOVrZOehwSH2Tt58PWYOlO67loNqjbOcZqnb9stsEN/PtSHUItGwWW70E\nSwbUeKA9u/sYeRtl2DodYOezOQgpRihB6dlZhAb2fS/qSmujS9jAzy7tJnQyJ0bF\nshvF7OdbWyXijGcvkYhfl4/NvxZ+V8Z6w3Rudq4j96mc+N5jeKu787W0+y5rfAlW\nfqD2Kofp2ra8z631AFiZUGP6wQ19b2oZfAGIdUaDQQKBgQDe16AyLQ82uzM9vwCj\nBZPeTajXFjazLDi3Mo8WOwkY79uFSWy00voz8o2GEg99dViZFJqZRDR3aZQ00Un0\n6empptv/xe0bqUf8KYj8MrF8Bh4yfrwynMoED+LphoKJrXE6GsCoWjPYt1g+q4Sq\nPAVIqW/JODNSqUP4j2z3ge4FoQKBgQDULkMOQOWYTHxQllglRiEBw2V4uhM3Nji0\nW6k0hlPQ3+aa8GGlxIFhYiFXZg4BOl9yKjq6A2PFkVq1NGw3Ve7GtwVRo5nUDCFf\n7Sg3iiSYNYY84cT1qlzSuw4h3lwyGrfq4Mc39fVmlu5fKtILtnhjTI++K0S9ce0/\n4DdL3EXH+wKBgHTqDFJG8cR1Ut0CaQMe2gW4GO0/6lL20IrNK+Ut9AfxT+sOKsp0\nJnE6wKWmtBnOhz1JYhMnhZ9g9TEA3Rxx3PX1ZVc8MLpihjH2WLh4oEXBr/YuJ+8l\n85dN/m8m8zXomY8ymgG50ZnSF6pJssDd3KfSvaOEqOilhdPS7AivUoIBAoGBANEM\ny3BtrEhDg2/60NnYoIiWNZGe83PAbln0vV9MwaPYFeKt1+d1FmwWPPdZS48WLhfT\nV40R7ekn7xD9l2lltx3+ELWA1PzA/tj+VlNyPd/hTGMLpfzNXysYtTHVXUzYWkCG\nOoH+SUxMhIsrK0vy+eYL9svM4astZi07AgAyBGalAoGAQ2ZBv3vwGpGgN71FppBr\nVxwIQ53mYSh5uRE+GgyLIUJl8WAW1cTGqg9i/YVEUjwvCiXofKJYn1hczCYlu9cx\naDH07UabJPsISPmMKlIDHMoDBLVxiQxWCa4eXSn2lBzJQjlXuNSl/j68bnPkDqNJ\nQ7LW1oOG+e0Vb2K6cktUIh8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "obp-541@oceanbestpractices-195713.iam.gserviceaccount.com",
+  "client_id": "103075203778190966556",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/obp-541%40oceanbestpractices-195713.iam.gserviceaccount.com"
+}

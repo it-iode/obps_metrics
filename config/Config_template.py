@@ -18,8 +18,10 @@ def get_settings():
     
     # google analytics API settings
     credentials['ga_scopes'] =              ''
-    credentials['ga_key_file_location'] =   ''
-    credentials['ga_view_id'] =             ''
+    credentials['ga_key_file_location_searchengine'] =   ''
+    credentials['ga_key_file_location_mainlandingpage'] =   ''        
+    credentials['ga_view_id_searchengine'] =             ''
+    credentials['ga_view_id_mainlandingpage'] =          ''       
     
     
     

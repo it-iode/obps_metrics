@@ -10,6 +10,7 @@ from collections import OrderedDict
 import pandas as pd
 import utils.db_connect as db_connect
 
+
 def date_ranges(date_start, date_end):
     
     dates = [date_start, date_end]

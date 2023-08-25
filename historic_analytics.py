@@ -16,8 +16,8 @@ import utils.AggregateInfo as AggregateInfo
 
 def main(date_start, date_end):
     #set list of dates to process
-    date_start = '2020-06-01'
-    date_end = '2020-07-01'
+    date_start = '2023-07-01'
+    date_end = '2023-07-15'
     dates_list = DateRanges.date_ranges(date_start, date_end)
     if len(dates_list) == 1:
         dates_list.append(date_end)

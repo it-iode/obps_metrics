@@ -7,7 +7,6 @@ Created on Fri Feb 28 08:18:22 2020
 """
 from datetime import datetime, timedelta
 #from dateutil import relativedelta
-import sys
 
 import utils.HelloAnalyticsOBPS as analytics_obps
 import utils.db_connect as db
@@ -16,7 +15,7 @@ import utils.AggregateInfo as AggregateInfo
 
 def main():
     ## Last Month metrics
-    date_start = datetime.strftime(datetime.now() - timedelta(31), '%Y-%m-%d')
+    date_start = datetime.strftime(datetime.now() - timedelta(30), '%Y-%m-%d')
     date_end = datetime.today().strftime('%Y-%m-%d')
     dates_list = DateRanges.date_ranges_month(date_start, date_end)
     

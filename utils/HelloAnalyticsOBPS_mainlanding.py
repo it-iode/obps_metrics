@@ -60,7 +60,8 @@ def get_report(analytics, start_date, end_date):
                       {'expression': 'ga:newUsers'},
                       {'expression':'ga:sessionsPerUser'}],
           #'dimensions': [{'name': 'ga:country'}, {'name': 'ga:pagePath'}]
-          'dimensions': [{'name': 'ga:country'}]
+          'dimensions': [{'name': 'ga:country'},
+                         {'name': 'ga:city'}]
         }]
       }
   ).execute()
@@ -83,7 +84,7 @@ def print_response(response):
     pagepaths_list = []
     sessions_user_list = []
 
-    columns = ['country','sessions','users']
+    columns = ['country', 'city', 'sessions','users']
     countries_df = pd.DataFrame(columns = columns)
 
     #columns = ['doc_path']
@@ -106,6 +107,9 @@ def print_response(response):
         if header == 'ga:country':
             #country_list.append(dimension)
             country = dimension
+        elif header == 'ga:city':
+            #country_list.append(dimension)
+            city = dimension
         elif header == 'ga:pagePath':
             #pagepaths_list.append(dimension)
             doc_path = dimension
@@ -127,7 +131,7 @@ def print_response(response):
               #     #sessions_user_list.append(value)
               #     sessions_user = value
       users_df = users_df.append({'users':int(user), 'new_users': int(new_user)}, ignore_index=True)
-      countries_df = countries_df.append({'country':country, 'users':int(user),'sessions': int(session)}, ignore_index=True)
+      countries_df = countries_df.append({'country':country, 'city':city,'users':int(user),'sessions': int(session)}, ignore_index=True)
       countries_df = countries_df[~countries_df.country.str.contains("Cayman Islands")]
       countries_df = countries_df[~countries_df.country.str.contains("(not set)")]
       #sessions_user_df = sessions_user_df.append({'sessions_user': sessions_user}, ignore_index=True)

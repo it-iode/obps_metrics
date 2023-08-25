@@ -14,6 +14,7 @@ import psycopg2
 def connect_db():
     #reload(sys)  
     #sys.setdefaultencoding('utf8')
+
     settings = config.get_settings()
     conn = psycopg2.connect(dbname=settings['db_metrics_dbname'],host=settings['db_metrics_host'],
                             port=settings['db_metrics_port'], user=settings['db_metrics_username'], 
