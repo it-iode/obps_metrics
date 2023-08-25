@@ -427,161 +427,159 @@ if __name__ == '__main__':
             db.write_db(cursor, conn, query, arguments)  
             print(str(df.loc[i, 'sdg']) + '    SDG written in database')  
             
-## --------------------------------------------------------------------------------------------------------
-            
-        # Adoption
-        adoption_cat_list = ['Multi-organisational', 'Organisational', 'National', 'Novel (no adoption outside originators)', 'International', 'Validated (tested by third parties)']
-        adoption_list = []
-        query = 'select text_value from metadatavalue where metadata_field_id = 168'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_adoption = processing.query_db(cursor, conn, query) 
-        for record in query_adoption:
-            for add in adoption_cat_list:
-                if add == record[0]:
-                    adoption_list.append(add)   
-
-
-
-
-
-
-    
-        # TRLs
-        trl_cat_list = ['TRL 1', 'TRL 2', 'TRL 3', 'TRL 4', 'TRL 5', 'TRL 6', 'TRL 7', 'TRL 8', 'TRL 9']
-        trl_list = []
-        count_old_trl_records=0
-        query = 'select text_value from metadatavalue where metadata_field_id = 164'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_trl = processing.query_db(cursor, conn, query)
-        for record in query_trl:
-            for trl in trl_cat_list:
-                if trl in record[0][0:5]:
-                    trl_list.append(trl)
-                    count_old_trl_records = count_old_trl_records + 1
-        
-        plot = processing.plot_pie_chart(trl_list, 'obps_trl')      
-
-        # TRLs New
-        trl_cat_list = ['N/A', 
-                        'Mature', 
-                        'Pilot', 
-                        'Concept']
-        trl_list = []
-        count_new_trl_records=0
-        query = 'select text_value from metadatavalue where metadata_field_id = 164'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_trl = processing.query_db(cursor, conn, query)
-        for record in query_trl:
-            for trl in trl_cat_list:
-                if record[0].startswith(trl):
-                    trl_list.append(trl)
-                    count_new_trl_records = count_new_trl_records + 1
-        
-        plot = processing.plot_pie_chart(trl_list, 'obps_trl_new')   
-        
-        # Best Practice type
-        bptype_cat_list = ['Guide', 'Training and Educational Material', 'Standard', 'Manual', 'Best Practice', 'Standard Operating Procedure']
-        bptype_list = []
-        query = 'select text_value from metadatavalue where metadata_field_id = 165'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_bptype = processing.query_db(cursor, conn, query)        
-        for record in query_bptype: 
-            for bptype in bptype_cat_list:
-                if (bptype == 'Standard') and (len(record[0]) == 8) and (bptype in record[0]):
-                    bptype_list.append(bptype)
-                elif (bptype == 'Standard Operating Procedure') and (bptype in record[0]):
-                    bptype_list.append(bptype)
-                elif (bptype != 'Standard') and (bptype != 'Standard Operating Procedure') and (bptype in record[0]):
-                    bptype_list.append(bptype)
-        plot = processing.plot_pie_chart(bptype_list, 'obps_bptype')         
-
-        # SDGs
-        sdg_cat_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
-        sdg_list = []
-        query = 'select text_value from metadatavalue where metadata_field_id = 162'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_sdg = processing.query_db(cursor, conn, query)
-        for record in query_sdg:
-            for sdg in sdg_cat_list:
-                if sdg == record[0].split('.')[0]:
-                    sdg_list.append(sdg)        
-        plot = processing.plot_pie_chart(sdg_list, 'obps_sdg') 
-        
-        # EOVs
-        eov_cat_list = ['N/A', 'Ocean colour', 'Sea state', 'Zooplankton biomass and diversity', 'Subsurface currents',
-                        'Phytoplankton biomass and diversity','Sea surface height', 'Sea surface temperature',
-                        'Subsurface temperature', 'Surface currents', 'Sea surface salinity', 'Subsurface salinity',
-                        'Ocean surface stress', 'Ocean surface heat flux', 'Biotoxins / Phycotoxins', 'Oxygen',
-                        'Seagrass Cover and composition', 'Ocean sound', 'Fish abundance and distribution',
-                        'Benthic invertebrate abundance and distribution', 'Macroalgal canopy cover and composition',
-                        'Mangroove cover and composition', 'Inorganic carbon', 'Hard coral cover and composition', 'stable carbon isotopes',
-                        'Dissolved organic carbon', 'Particulate matter', 'Nutrients', 'Marine turtles, birds, mammals abundance and distribution',
-                        'transient tracers', 'Marine debris', 'Nitrous oxide', 'Microbe biomass and diversity', 'Sea ice', 'pH', ]
-        eov_list = []
-        query = 'select text_value from metadatavalue where metadata_field_id = 163'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_eov = processing.query_db(cursor, conn, query)        
-        for record in query_eov:
-            for eov in eov_cat_list:
-                if eov.lower() == record[0].lower():
-                    eov_list.append(eov)        
-        plot = processing.plot_pie_chart(eov_list, 'obps_eov')  
-        
-        # Adoption
-        adoption_cat_list = ['Multi-organisational', 'Organisational', 'National', 'Novel (no adoption outside originators)', 'International', 'Validated (tested by third parties)']
-        adoption_list = []
-        query = 'select text_value from metadatavalue where metadata_field_id = 168'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_adoption = processing.query_db(cursor, conn, query) 
-        for record in query_adoption:
-            for add in adoption_cat_list:
-                if add == record[0]:
-                    adoption_list.append(add)        
-        plot = processing.plot_pie_chart(adoption_list, 'obps_adoption')         
-        
-        # Discipline
-        discipline_cat_list = ['Cross-discipline', 'Atmosphere', 'Biological oceanography', 
-                                'Chemical oceanography','Environment', 'Fisheries and aquaculture',
-                                'Marine geology', 'Physical oceanography', 'Terrestrial', 'Administration and dimensions',
-                                'Human activity']
-        discipline_list = []
-        query = 'select text_value from metadatavalue where metadata_field_id = 141'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_discipline = processing.query_db(cursor, conn, query) 
-        for record in query_discipline:
-            for add in discipline_cat_list:
-                if add in record[0]:
-                    discipline_list.append(add)        
-        plot = processing.plot_pie_chart(discipline_list, 'obps_discipline')  
-
-        # Methodology Type
-        methtype_cat_list = ['Method', 'Specification of criteria', 'Guidelines & Policies',
-                              'Reports with methodological relevance', 'Best Practice',
-                              'Training/Educational material', 'Description of a metrology standard']
-        methtype_list = []
-        query = 'select text_value from metadatavalue where metadata_field_id = 173'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_methtype = processing.query_db(cursor, conn, query) 
-        for record in query_methtype:
-            for add in methtype_cat_list:
-                if add == record[0]:
-                    methtype_list.append(add)        
-        plot = processing.plot_pie_chart(methtype_list, 'obps_methodology_type')   
-
-
-        # Endorsement Type
-        
-        
-        methtype_cat_list = ["deJureStandard","deFactoStandard","goodPractice","recommendedPractice","bestPractice"]
-        methtype_list = []
-        query = 'select text_value from metadatavalue where metadata_field_id IN (174,175,176,177,178)'
-        cursor, conn = processing.connect_db(processing.db_config)
-        query_methtype = processing.query_db(cursor, conn, query) 
-        for record in query_methtype:
-            for add in methtype_cat_list:
-                if add == record[0]:
-                    methtype_list.append(add)        
-        plot = processing.plot_pie_chart(methtype_list, 'obps_authEndorsement_type')          
+## ---  PLOT DATA  -----------------------------------------------------------------------------------------------------
+        #
+        # # Adoption
+        # adoption_cat_list = ['Multi-organisational', 'Organisational', 'National', 'Novel (no adoption outside originators)', 'International', 'Validated (tested by third parties)']
+        # adoption_list = []
+        # query = 'select text_value from metadatavalue where metadata_field_id = 168'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_adoption = processing.query_db(cursor, conn, query)
+        # for record in query_adoption:
+        #     for add in adoption_cat_list:
+        #         if add == record[0]:
+        #             adoption_list.append(add)
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        # # TRLs
+        # trl_cat_list = ['TRL 1', 'TRL 2', 'TRL 3', 'TRL 4', 'TRL 5', 'TRL 6', 'TRL 7', 'TRL 8', 'TRL 9']
+        # trl_list = []
+        # count_old_trl_records=0
+        # query = 'select text_value from metadatavalue where metadata_field_id = 164'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_trl = processing.query_db(cursor, conn, query)
+        # for record in query_trl:
+        #     for trl in trl_cat_list:
+        #         if trl in record[0][0:5]:
+        #             trl_list.append(trl)
+        #             count_old_trl_records = count_old_trl_records + 1
+        #
+        # plot = processing.plot_pie_chart(trl_list, 'obps_trl')
+        #
+        # # TRLs New
+        # trl_cat_list = ['N/A',
+        #                 'Mature',
+        #                 'Pilot',
+        #                 'Concept']
+        # trl_list = []
+        # count_new_trl_records=0
+        # query = 'select text_value from metadatavalue where metadata_field_id = 164'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_trl = processing.query_db(cursor, conn, query)
+        # for record in query_trl:
+        #     for trl in trl_cat_list:
+        #         if record[0].startswith(trl):
+        #             trl_list.append(trl)
+        #             count_new_trl_records = count_new_trl_records + 1
+        #
+        # plot = processing.plot_pie_chart(trl_list, 'obps_trl_new')
+        #
+        # # Best Practice type
+        # bptype_cat_list = ['Guide', 'Training and Educational Material', 'Standard', 'Manual', 'Best Practice', 'Standard Operating Procedure']
+        # bptype_list = []
+        # query = 'select text_value from metadatavalue where metadata_field_id = 165'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_bptype = processing.query_db(cursor, conn, query)
+        # for record in query_bptype:
+        #     for bptype in bptype_cat_list:
+        #         if (bptype == 'Standard') and (len(record[0]) == 8) and (bptype in record[0]):
+        #             bptype_list.append(bptype)
+        #         elif (bptype == 'Standard Operating Procedure') and (bptype in record[0]):
+        #             bptype_list.append(bptype)
+        #         elif (bptype != 'Standard') and (bptype != 'Standard Operating Procedure') and (bptype in record[0]):
+        #             bptype_list.append(bptype)
+        # plot = processing.plot_pie_chart(bptype_list, 'obps_bptype')
+        #
+        # # SDGs
+        # sdg_cat_list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+        # sdg_list = []
+        # query = 'select text_value from metadatavalue where metadata_field_id = 162'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_sdg = processing.query_db(cursor, conn, query)
+        # for record in query_sdg:
+        #     for sdg in sdg_cat_list:
+        #         if sdg == record[0].split('.')[0]:
+        #             sdg_list.append(sdg)
+        # plot = processing.plot_pie_chart(sdg_list, 'obps_sdg')
+        #
+        # # EOVs
+        # eov_cat_list = ['N/A', 'Ocean colour', 'Sea state', 'Zooplankton biomass and diversity', 'Subsurface currents',
+        #                 'Phytoplankton biomass and diversity','Sea surface height', 'Sea surface temperature',
+        #                 'Subsurface temperature', 'Surface currents', 'Sea surface salinity', 'Subsurface salinity',
+        #                 'Ocean surface stress', 'Ocean surface heat flux', 'Biotoxins / Phycotoxins', 'Oxygen',
+        #                 'Seagrass Cover and composition', 'Ocean sound', 'Fish abundance and distribution',
+        #                 'Benthic invertebrate abundance and distribution', 'Macroalgal canopy cover and composition',
+        #                 'Mangroove cover and composition', 'Inorganic carbon', 'Hard coral cover and composition', 'stable carbon isotopes',
+        #                 'Dissolved organic carbon', 'Particulate matter', 'Nutrients', 'Marine turtles, birds, mammals abundance and distribution',
+        #                 'transient tracers', 'Marine debris', 'Nitrous oxide', 'Microbe biomass and diversity', 'Sea ice', 'pH', ]
+        # eov_list = []
+        # query = 'select text_value from metadatavalue where metadata_field_id = 163'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_eov = processing.query_db(cursor, conn, query)
+        # for record in query_eov:
+        #     for eov in eov_cat_list:
+        #         if eov.lower() == record[0].lower():
+        #             eov_list.append(eov)
+        # plot = processing.plot_pie_chart(eov_list, 'obps_eov')
+        #
+        # # Adoption
+        # adoption_cat_list = ['Multi-organisational', 'Organisational', 'National', 'Novel (no adoption outside originators)', 'International', 'Validated (tested by third parties)']
+        # adoption_list = []
+        # query = 'select text_value from metadatavalue where metadata_field_id = 168'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_adoption = processing.query_db(cursor, conn, query)
+        # for record in query_adoption:
+        #     for add in adoption_cat_list:
+        #         if add == record[0]:
+        #             adoption_list.append(add)
+        # plot = processing.plot_pie_chart(adoption_list, 'obps_adoption')
+        #
+        # # Discipline
+        # discipline_cat_list = ['Cross-discipline', 'Atmosphere', 'Biological oceanography',
+        #                         'Chemical oceanography','Environment', 'Fisheries and aquaculture',
+        #                         'Marine geology', 'Physical oceanography', 'Terrestrial', 'Administration and dimensions',
+        #                         'Human activity']
+        # discipline_list = []
+        # query = 'select text_value from metadatavalue where metadata_field_id = 141'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_discipline = processing.query_db(cursor, conn, query)
+        # for record in query_discipline:
+        #     for add in discipline_cat_list:
+        #         if add in record[0]:
+        #             discipline_list.append(add)
+        # plot = processing.plot_pie_chart(discipline_list, 'obps_discipline')
+        #
+        # # Methodology Type
+        # methtype_cat_list = ['Method', 'Specification of criteria', 'Guidelines & Policies',
+        #                       'Reports with methodological relevance', 'Best Practice',
+        #                       'Training/Educational material', 'Description of a metrology standard']
+        # methtype_list = []
+        # query = 'select text_value from metadatavalue where metadata_field_id = 173'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_methtype = processing.query_db(cursor, conn, query)
+        # for record in query_methtype:
+        #     for add in methtype_cat_list:
+        #         if add == record[0]:
+        #             methtype_list.append(add)
+        # plot = processing.plot_pie_chart(methtype_list, 'obps_methodology_type')
+        #
+        #
+        # # Endorsement Type
+        # methtype_cat_list = ["deJureStandard","deFactoStandard","goodPractice","recommendedPractice","bestPractice"]
+        # methtype_list = []
+        # query = 'select text_value from metadatavalue where metadata_field_id IN (174,175,176,177,178)'
+        # cursor, conn = processing.connect_db(processing.db_config)
+        # query_methtype = processing.query_db(cursor, conn, query)
+        # for record in query_methtype:
+        #     for add in methtype_cat_list:
+        #         if add == record[0]:
+        #             methtype_list.append(add)
+        # plot = processing.plot_pie_chart(methtype_list, 'obps_authEndorsement_type')
         
     except Exception:
         logging.getLogger().error("Fatal error in processing_track", exc_info=True) 
