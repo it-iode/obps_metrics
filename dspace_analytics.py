@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/bin/bash
+"exec" "`dirname $0`/venv/bin/python" "$0" "$@"
 # -*- coding: utf-8 -*-
 """
 Created on Thu Mar 17 16:47:09 2022
@@ -13,6 +14,7 @@ import matplotlib.pyplot as plt
 import utils.db_connect as db
 import country_list
 import config.Config as config
+import re
 
 class DspaceAudit():
     def __init__(self):
@@ -229,6 +231,15 @@ if __name__ == '__main__':
         #  Insert into database if activity_code does not exist        
         for i in range(len(df)) :
                     
+            yearCreated = df.loc[i, 'year_created']
+            #print(yearCreated)
+            #print(type(yearCreated))
+            if yearCreated is None:
+                yearCreated = '3000'
+
+            if re.search('^(\d{4})\-.+\-.+$', yearCreated):
+                yearCreated = re.search('^(\d{4})\-.+\-.+$', yearCreated).groups(1)
+
             arguments = {'str0':df.loc[i, 'handle'],
                           'str1':df.loc[i, 'title'], 
                           'str2':df.loc[i, 'abstract'],
@@ -240,7 +251,7 @@ if __name__ == '__main__':
                           'str10':df.loc[i, 'publisher_place'],
                           'str11':df.loc[i, 'country'],
                           'str12':df.loc[i, 'last_modified'],
-                          'str13':df.loc[i, 'year_created'],
+                          'str13':yearCreated,
                           'str14':df.loc[i, 'dspace_object_id'],
                           }
 
@@ -250,6 +261,7 @@ if __name__ == '__main__':
             VALUES ( %(str0)s,%(str1)s, %(str2)s,%(str3)s,%(str4)s,%(str7)s,%(str8)s,%(str9)s,%(str10)s,%(str11)s,%(str12)s,%(str13)s,%(str14)s);
             '''         
             
+            #print(arguments)
             db.write_db(cursor, conn, query, arguments)  
             print(str(df.loc[i, 'handle']) + '     record written in database')       
 
