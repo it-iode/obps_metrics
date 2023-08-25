@@ -15,7 +15,7 @@ def date_ranges(date_start, date_end):
     
     dates = [date_start, date_end]
     start, end = [datetime.strptime(_, "%Y-%m-%d") for _ in dates]
-    date_list = OrderedDict(((start + timedelta(_)).strftime(r"%Y-%m"), None) for _ in xrange((end - start).days)).keys()
+    date_list = OrderedDict(((start + timedelta(_)).strftime(r"%Y-%m"), None) for _ in range((end - start).days)).keys()
     
     dates_list = []
     for i in range(0,len(date_list)):
@@ -29,7 +29,7 @@ def date_ranges_month(date_start, date_end):
     
     dates = [date_start, date_end]
     start, end = [datetime.strptime(_, "%Y-%m-%d") for _ in dates]
-    date_list = OrderedDict(((start + timedelta(_)).strftime(r"%Y-%m-%d"), None) for _ in xrange((end - start).days)).keys()
+    date_list = OrderedDict(((start + timedelta(_)).strftime(r"%Y-%m-%d"), None) for _ in range((end - start).days)).keys()
     
     dates_list = []
     for i in range(0,len(date_list)):
